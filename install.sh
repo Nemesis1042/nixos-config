@@ -121,7 +121,7 @@ install() {
 
     # Build the system (flakes + home manager)
     echo -e "\nBuilding the system...\n"
-    sudo nixos-rebuild switch --flake .#${HOST}
+    sudo nixos-rebuild switch --cores 2 --flake .#${HOST}
 }
 
 main() {
