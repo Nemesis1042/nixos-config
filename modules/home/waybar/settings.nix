@@ -21,7 +21,7 @@ let
 in
 {
   programs.waybar.settings.mainBar = with custom; {
-    position = "bottom";
+    position = "top";
     layer = "top";
     height = 28;
     margin-top = 0;
@@ -35,13 +35,13 @@ in
     ];
     modules-center = [ "clock" ];
     modules-right = [
-      "cpu"
-      "memory"
+      #"cpu"
+      #"memory"
       (if (host == "desktop") then "disk" else "")
       "pulseaudio"
       "network"
       "battery"
-      "hyprland/language"
+      #"hyprland/language"
       "custom/notification"
     ];
     clock = {
@@ -143,6 +143,7 @@ in
       format = "<span foreground='#FABD2F'> </span> {}";
       format-fr = "FR";
       format-en = "US";
+      format-de = "DE";
     };
     "custom/launcher" = {
       format = "";

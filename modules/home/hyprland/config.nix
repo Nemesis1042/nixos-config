@@ -37,8 +37,8 @@
       general = {
         "$mainMod" = "SUPER";
         layout = "dwindle";
-        gaps_in = 6;
-        gaps_out = 12;
+        gaps_in = 5;
+        gaps_out = 10;
         border_size = 2;
         "col.active_border" = "rgb(98971A) rgb(CC241D) 45deg";
         "col.inactive_border" = "0x00000000";
