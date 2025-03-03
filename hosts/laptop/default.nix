@@ -59,5 +59,13 @@
         cpupower
       ]
       ++ [ pkgs.cpupower-gui ];
+
+      loader.grub = {
+      enable = true;
+      efiSupport = true;
+      device = "nodev"; # Required for EFI
+    };
+
+    loader.efi.canTouchEfiVariables = true;
   };
 }
