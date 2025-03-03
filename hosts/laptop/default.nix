@@ -10,6 +10,8 @@
     brightnessctl
     cpupower-gui
     powertop
+    fprintd
+    fprintd-tod
   ];
 
   services = {
