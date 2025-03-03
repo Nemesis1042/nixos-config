@@ -21,7 +21,7 @@
       ];
 
       input = {
-        kb_layout = "us,fr";
+        kb_layout = "de";
         kb_options = "grp:alt_caps_toggle";
         numlock_by_default = true;
         repeat_delay = 300;

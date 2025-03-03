@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -49,6 +49,7 @@
   };
 
   powerManagement.cpuFreqGovernor = "performance";
+  home-manager.backupFileExtension = "backup";
 
   boot = {
     kernelModules = [ "acpi_call" ];
@@ -65,7 +66,8 @@
       efiSupport = true;
       device = "nodev"; # Required for EFI
     };
-
+    loader.systemd-boot.enable = lib.mkForce false; # 🚨 Disable systemd-boot
     loader.efi.canTouchEfiVariables = true;
+
   };
 }
