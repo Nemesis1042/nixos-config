@@ -8,9 +8,7 @@ in
 {
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    nerd-fonts.Hack Nerd Font
-    nerd-fonts.Hack Nerd Font
-    nerd-fonts.Hack Nerd Font
+    nerd-fonts.hack
     nerd-fonts.symbols-only
     twemoji-color-font
     noto-fonts-emoji
