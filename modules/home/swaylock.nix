@@ -25,7 +25,7 @@
       effect-vignette = "0.75:0.75";
       effect-pixelate = 5;
 
-      font = "Maple Mono";
+      font = "Hack Nerd Font";
 
       text-wrong-color = "FBF1C7FF";
       text-ver-color = "FBF1C7FF";

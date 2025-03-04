@@ -32,7 +32,7 @@ in
       text = cmd[update:1000] echo "$(date +"%k:%M")"
       color = rgba(235, 219, 178, .9)
       font_size = 115
-      font_family = Maple Mono Bold
+      font_family = Hack Nerd Font
       shadow_passes = 3
       position = 0, ${if (host == "laptop") then "-25" else "-150"}
       halign = center
@@ -45,7 +45,7 @@ in
       text = cmd[update:1000] echo "- $(date +"%A, %B %d") -"
       color = rgba(235, 219, 178, .9)
       font_size = 18
-      font_family = Maple Mono
+      font_family = Hack Nerd Font
       shadow_passes = 3
       position = 0, ${if (host == "laptop") then "-225" else "-350"}
       halign = center
@@ -74,7 +74,7 @@ in
       text =   $USER
       color = rgba(235, 219, 178, 1)
       font_size = 15
-      font_family = Maple Mono Bold
+      font_family = Hack Nerd Font
       position = 0, ${if (host == "laptop") then "131" else "281"}
       halign = center
       valign = bottom
@@ -94,7 +94,7 @@ in
       color = rgba(235, 219, 178, .9)
       font_color = rgba(235, 219, 178, .9)
       font_size = 14
-      font_family = Maple Mono Bold
+      font_family = Hack Nerd Font
       fade_on_empty = false
       placeholder_text = <i><span foreground="##fbf1c7">Enter Password</span></i>
       hide_input = false

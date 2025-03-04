@@ -11,7 +11,7 @@
 
   dconf.settings = {
     "org/gnome/TextEditor" = {
-      custom-font = "Maple Mono 15";
+      custom-font = "Hack Nerd Font 15";
       highlight-current-line = true;
       indent-style = "space";
       restore-session = false;

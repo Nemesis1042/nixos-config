@@ -26,5 +26,6 @@
     SDL_VIDEODRIVER = "wayland";
     CLUTTER_BACKEND = "wayland";
     GTK_THEME = "Colloid-Green-Dark-Gruvbox";
+    FONT_FAMILY = "Hack Nerd Font";
   };
 }

@@ -1,7 +1,7 @@
 { host, ... }:
 let
   custom = {
-    font = "Maple Mono";
+    font = "Hack Nerd Font";
     font_size = "18px";
     font_weight = "bold";
     text_color = "#FBF1C7";
