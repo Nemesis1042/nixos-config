@@ -12,7 +12,7 @@
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
-    hyprland.url = "github:hyprwm/hyprland/nix-module";
+    hyprland.url = "github:hyprwm/hyprland";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -57,14 +57,14 @@
     in
     {
       nixosConfigurations = {
-        desktop = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [ ./hosts/desktop ];
-          specialArgs = {
-            host = "desktop";
-            inherit self inputs username;
-          };
-        };
+        #desktop = nixpkgs.lib.nixosSystem {
+        #  inherit system;
+        # modules = [ ./hosts/desktop ];
+        # specialArgs = {
+        #   host = "desktop";
+        #   inherit self inputs username;
+        # };
+        #};
         laptop = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [ ./hosts/laptop ];
@@ -73,14 +73,14 @@
             inherit self inputs username;
           };
         };
-        vm = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [ ./hosts/vm ];
-          specialArgs = {
-            host = "vm";
-            inherit self inputs username;
-          };
-        };
+        #vm = nixpkgs.lib.nixosSystem {
+        #  inherit system;
+        #  modules = [ ./hosts/vm ];
+        #  specialArgs = {
+        #    host = "vm";
+        #    inherit self inputs username;
+        #  };
+        #};
       };
     };
 }
