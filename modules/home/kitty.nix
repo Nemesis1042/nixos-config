@@ -6,15 +6,15 @@
     themeFile = "gruvbox-dark-hard";
 
     font = {
-      name = "Maple Mono";
+      name = "hack";
       size = if (host == "laptop") then 15 else 16;
     };
 
     extraConfig = ''
-      font_features MapleMono-Regular +ss01 +ss02 +ss04
-      font_features MapleMono-Bold +ss01 +ss02 +ss04
-      font_features MapleMono-Italic +ss01 +ss02 +ss04
-      font_features MapleMono-Light +ss01 +ss02 +ss04
+      font_features hack-Regular +ss01 +ss02 +ss04
+      font_features hack-Bold +ss01 +ss02 +ss04
+      font_features hack +ss01 +ss02 +ss04
+      font_features hack +ss01 +ss02 +ss04
     '';
 
     settings = {

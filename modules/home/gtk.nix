@@ -21,7 +21,7 @@ in
   gtk = {
     enable = true;
     font = {
-      name = "Maple Mono";
+      name = "hack";
       size = 12;
     };
     theme = {
