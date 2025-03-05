@@ -35,16 +35,17 @@
       };
 
       general = {
-        "$mainMod" = "SUPER";
-        layout = "dwindle";
-        gaps_in = 4;
-        gaps_out = 8;
-        border_size = 2;
-        "col.active_border" = "rgb(98971A) rgb(CC241D) 45deg";
-        "col.inactive_border" = "0x00000000";
-        border_part_of_window = false;
-        no_border_on_floating = false;
-      };
+    	"$mainMod" = "SUPER";
+    	layout = "dwindle";
+    	gaps_in = 4;
+    	gaps_out = 8;
+    	border_size = 3;  # Keep only one border_size setting
+
+	#col.active_border = "0x98971A 0xCC241D 45deg";
+	#col.inactive_border = "0x00000000";
+	};
+
+
 
       misc = {
         disable_autoreload = true;
