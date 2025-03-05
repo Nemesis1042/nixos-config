@@ -44,6 +44,8 @@
 
       install = "$HOME/add_pkg.sh";
       prm = "$HOME/remove_pkg.sh";
+      findpkgs="$HOME/find_all_pkgs.sh";
+      listpkgs="$HOME/list_installed_pkgs.sh";
 
       # python
       piv = "python -m venv .venv";
