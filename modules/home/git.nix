@@ -24,7 +24,18 @@
     };
   };
 
-  home.packages = [ pkgs.gh ]; # pkgs.git-lfs
+  # SSH-Agent aktivieren für Git-SSH-Zugriff
+  programs.ssh = {
+    enable = true;
+    extraConfig = ''
+      Host github.com
+        IdentityFile ~/.ssh/id_rsa
+        User git
+        StrictHostKeyChecking no
+    '';
+  }; 
+
+  home.packages = [ pkgs.gh pkgs.openssh]; # pkgs.git-lfs
 
   programs.zsh.shellAliases = {
     g = "lazygit";
