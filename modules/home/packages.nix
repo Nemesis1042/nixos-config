@@ -99,6 +99,12 @@ in
     python3
     python312Packages.ipython
 
+
+    #brave
+    whatsapp-for-linux
+
+
+
     inputs.alejandra.defaultPackage.${system}
   ]);
 }
