@@ -58,6 +58,7 @@ in
     yt-dlp-light
     xdg-utils
     xxd
+    masterpdfeditor
 
     ## CLI 
     cbonsai                           # terminal screensaver
@@ -102,7 +103,7 @@ in
 
     #brave
     whatsapp-for-linux
-
+    mysql84
 
 
     inputs.alejandra.defaultPackage.${system}
