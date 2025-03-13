@@ -7,7 +7,7 @@ let
           name = "gruvbox-material-icon-theme";
           publisher = "JonathanHarty";
           version = "1.1.5";
-          hash = "sha256-GCkhwagp4UAwS6GsIhmrHC3SDXcKgPE7AtjrXYR3akM=";
+          hash = "sha256-86UWUuWKT6adx4hw4OJw3cSZxWZKLH4uLTO+Ssg75gY=";
         };
       };
 in
