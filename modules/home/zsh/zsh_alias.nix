@@ -51,7 +51,7 @@
       piv = "python -m venv .venv";
       psv = "source .venv/bin/activate";
 
-      install= "nvim /home/arkatosh/nixos-config/modules/home/packages.nix"
+      install= "nvim /home/arkatosh/nixos-config/modules/home/packages.nix";
     };
   };
 }
