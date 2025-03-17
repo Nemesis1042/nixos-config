@@ -115,8 +115,8 @@ in
   	device = "amdgpu_bl1";
   	format = "{icon} {percent}%";
   	format-icons = ["" ""];
-  	on-scroll-up = "brightnessctl set +5%";
-  	on-scroll-down = "brightnessctl set 5%-";
+  	on-scroll-down = "brightnessctl set +5%";
+  	on-scroll-up = "brightnessctl set 5%-";
     };
     pulseaudio = {
       format = "{icon} {volume}%";

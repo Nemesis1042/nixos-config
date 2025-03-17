@@ -59,6 +59,8 @@ in
     xdg-utils
     xxd
     masterpdfeditor
+    alacritty
+    vscode
 
     ## CLI 
     cbonsai                           # terminal screensaver
@@ -104,6 +106,23 @@ in
     #brave
     whatsapp-for-linux
     mysql84
+    steam
+    nextcloud-client
+    
+
+    nmap
+    theharvester
+    sqlmap
+    nikto
+    thc-hydra
+    hydra-cli
+    john
+    johnny
+    ffuf
+    aircrack-ng
+    wifite2
+    wireshark
+    sherlock
 
 
     inputs.alejandra.defaultPackage.${system}

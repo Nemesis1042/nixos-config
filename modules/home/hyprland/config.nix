@@ -141,7 +141,7 @@
         "$mainMod, F1, exec, show-keybinds"
 
         # keybindings
-        "$mainMod, Return, exec, ghostty"
+        "$mainMod, Return, exec, alacritty"
         "ALT, Return, exec, [float; size 1111 700] ghostty"
         "$mainMod SHIFT, Return, exec, [fullscreen] ghostty"
         "$mainMod, B, exec, hyprctl dispatch exec '[workspace 1 silent] zen'"
