@@ -38,6 +38,7 @@ in
       #"cpu"
       #"memory"
       (if (host == "desktop") then "disk" else "")
+      "backlight"
       "pulseaudio"
       "network"
       "battery"
@@ -109,6 +110,13 @@ in
     tray = {
       icon-size = 20;
       spacing = 8;
+    };
+    backlight = {
+  	device = "amdgpu_bl1";
+  	format = "{icon} {percent}%";
+  	format-icons = ["" ""];
+  	on-scroll-up = "brightnessctl set +5%";
+  	on-scroll-down = "brightnessctl set 5%-";
     };
     pulseaudio = {
       format = "{icon} {volume}%";
