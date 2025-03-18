@@ -1,1 +1,110 @@
-#################
+# Window Customization
+window:
+  dimensions:
+    columns: 100
+    lines: 30
+  padding:
+    x: 12
+    y: 12
+  decorations: full
+  opacity: 0.9
+  startup_mode: Windowed
+  dynamic_padding: true
+
+# Font Configuration
+font:
+  normal:
+    family: "Hack"
+    style: Regular
+  bold:
+    family:  "Hack"
+    style: Bold
+  italic:
+    family: "Hack"
+    style: Italic
+  size: 13.0
+  offset:
+    x: 0
+    y: 1
+  glyph_offset:
+    x: 0
+    y: 0
+  builtin_box_drawing: true
+
+# Cursor Customization
+cursor:
+  style:
+    shape: Block
+    blinking: Always
+  blink_interval: 500
+  thickness: 0.2
+  unfocused_hollow: true
+
+# Colorscheme (Catppuccin Mocha)
+colors:
+  primary:
+    background: '#1e1e2e'
+    foreground: '#cdd6f4'
+
+  normal:
+    black:   '#45475a'
+    red:     '#f38ba8'
+    green:   '#a6e3a1'
+    yellow:  '#f9e2af'
+    blue:    '#89b4fa'
+    magenta: '#f5c2e7'
+    cyan:    '#94e2d5'
+    white:   '#bac2de'
+
+  bright:
+    black:   '#585b70'
+    red:     '#f38ba8'
+    green:   '#a6e3a1'
+    yellow:  '#f9e2af'
+    blue:    '#89b4fa'
+    magenta: '#f5c2e7'
+    cyan:    '#94e2d5'
+    white:   '#a6adc8'
+
+  cursor:
+    text: '#1e1e2e'
+    cursor: '#f5e0dc'
+
+  selection:
+    text: '#1e1e2e'
+    background: '#f5c2e7'
+
+# Shell integration
+shell:
+  program: /bin/zsh
+  args:
+    - --login
+
+# Mouse Configuration
+mouse:
+  hide_when_typing: true
+
+# Scrolling behavior
+scrolling:
+  history: 10000
+  multiplier: 3
+
+# Performance Optimizations
+draw_bold_text_with_bright_colors: true
+
+# Key Bindings (Custom)
+key_bindings:
+  - { key: V, mods: Control|Shift, action: Paste }
+  - { key: C, mods: Control|Shift, action: Copy }
+  - { key: N, mods: Control|Shift, action: SpawnNewInstance }
+  - { key: Plus, mods: Control, action: IncreaseFontSize }
+  - { key: Minus, mods: Control, action: DecreaseFontSize }
+  - { key: Key0, mods: Control, action: ResetFontSize }
+
+# Environment Variables
+env:
+  TERM: xterm-256color
+
+# Live Config Reload
+live_config_reload: true
+
