@@ -57,17 +57,9 @@
         multiplier = 3;
       };
 
-      live_config_reload = true;
+      general.live_config_reload = true;
       env.TERM = "xterm-256color";
 
-      key_bindings = [
-        { key = "V"; mods = "Control|Shift"; action = "Paste"; }
-        { key = "C"; mods = "Control|Shift"; action = "Copy"; }
-        { key = "N"; mods = "Control|Shift"; action = "SpawnNewInstance"; }
-        { key = "Plus"; mods = "Control"; action = "IncreaseFontSize"; }
-        { key = "Minus"; mods = "Control"; action = "DecreaseFontSize"; }
-        { key = "Key0"; mods = "Control"; action = "ResetFontSize"; }
-      ];
     };
   };
 }
