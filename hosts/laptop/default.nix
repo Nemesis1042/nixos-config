@@ -4,6 +4,7 @@
     ./hardware-configuration.nix
     ./../../modules/core
     ../../modules/core/fonts.nix
+    #./../../modules/home/nvim.nix
   ];
 
   environment.systemPackages = with pkgs; [

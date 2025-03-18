@@ -1,83 +1,72 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
-  imports = [ inputs.nvf.homeManagerModules.default ];
-
   programs.neovim = {
     enable = true;
-    vimAlias = true;
-    viAlias = true;
-  };
 
-  programs.nvf = {
-    enable = true;
+    plugins = with pkgs.vimPlugins; [
+      # Theme
+      tokyonight-nvim
 
-    settings.vim = {
-      vimAlias = true;
-      viAlias = true;
+      # Syntax Highlighting
+      nvim-treesitter.withAllGrammars
 
-      ## 🌙 Theme & UI
-      theme = {
-        enable = true;
-        name = "tokyonight"; # Alternatives: "gruvbox", "catppuccin"
-        style = "storm";      # "storm", "night", "day"
-        transparent = false;
-      };
+      # Fuzzy Finder
+      telescope-nvim
+      telescope-fzf-native-nvim
 
-      statusline.lualine.enable = true;
+      # Autovervollständigung
+      nvim-cmp
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      cmp-cmdline
+      luasnip
+      cmp_luasnip
 
-      ## 🔍 Navigation (Removed `luaConfig`)
-      telescope.enable = true;
-      which-key.enable = true;
+      # Statuszeile
+      lualine-nvim
 
-      ## 🔧 LSP
-      lsp = {
-        formatOnSave = true;
-        lspkind.enable = true;
-        lightbulb.enable = true;
-        lspsaga.enable = true;
-        trouble.enable = true;
-        lspSignature.enable = true;
-      };
+      # LSP & Tools
+      mason-nvim
+      mason-lspconfig-nvim
+      nvim-lspconfig
 
-      treesitter.enable = true;
-      treesitter.autoInstall = true;
+      # Dateiexplorer
+      nvim-tree-lua
 
-      ## 📝 Programming Languages
-      languages = {
-        enableLSP = true;
-        enableFormat = true;
-        enableTreesitter = true;
-        enableExtraDiagnostics = true;
+      # Git Integration
+      gitsigns-nvim
 
-        nix.enable = true;
-        clang.enable = true;
-        python.enable = true;
-        lua.enable = true;
-        bash.enable = true;
-        rust.enable = true;
-      };
+      # Einfaches Kommentieren
+      comment-nvim
 
-      ## 📦 Manually Adding Plugins
-      extraPlugins = [
-        pkgs.vimPlugins.nvim-cmp
-        pkgs.vimPlugins.cmp-nvim-lsp
-        pkgs.vimPlugins.cmp-buffer
-        pkgs.vimPlugins.cmp-path
-        pkgs.vimPlugins.cmp-cmdline
-        pkgs.vimPlugins.luasnip
-        pkgs.vimPlugins.nvim-autopairs
-        pkgs.vimPlugins.lspkind-nvim
-        pkgs.vimPlugins.comment-nvim
-        pkgs.vimPlugins.gitsigns-nvim
-        pkgs.vimPlugins.todo-comments-nvim
-        pkgs.vimPlugins.harpoon
-        pkgs.vimPlugins.neo-tree-nvim
-        pkgs.vimPlugins.telescope-fzf-native-nvim  # Added FZF extension manually
-      ];
+      # Keybindings Übersicht
+      which-key-nvim
+    ];
 
-      ## ✅ Corrected Lua Config (Replaced `luaConfig` with `extraConfigLuaPost`)
-      extraConfigLuaPost = ''
-        require('telescope').setup{
+    extraConfig = ''
+      " Tokyonight aktivieren
+      colorscheme tokyonight
+
+      lua << EOF
+        require('tokyonight').setup({
+          style = "storm",
+          transparent = false,
+        })
+
+        require('lualine').setup {
+          options = { theme = 'tokyonight' },
+        }
+
+        require('nvim-tree').setup {}
+
+        require('gitsigns').setup {}
+
+        require('Comment').setup {}
+
+        require('which-key').setup {}
+
+        require('telescope').setup {
           extensions = {
             fzf = {
               fuzzy = true,
@@ -88,8 +77,53 @@
           }
         }
         require('telescope').load_extension('fzf')
-      '';
-    };
+
+        require('nvim-treesitter.configs').setup {
+          highlight = { enable = true },
+          indent = { enable = true },
+        }
+
+        local cmp = require'cmp'
+        local luasnip = require'luasnip'
+
+        cmp.setup {
+          snippet = {
+            expand = function(args)
+              luasnip.lsp_expand(args.body)
+            end,
+          },
+          mapping = {
+            ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<C-e>'] = cmp.mapping.abort(),
+            ['<CR>'] = cmp.mapping.confirm({ select = true }),
+          },
+          sources = cmp.config.sources({
+            { name = 'nvim_lsp' },
+            { name = 'luasnip' },
+          }, {
+            { name = 'buffer' },
+            { name = 'path' },
+          })
+        }
+
+        require("mason").setup()
+        require("mason-lspconfig").setup({
+          ensure_installed = { "lua_ls", "pyright", "tsserver", "ts_ls" , "clangd" },
+        })
+
+        local lspconfig = require('lspconfig')
+        local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+        local servers = { 'lua_ls', 'pyright', 'tsserver', "ts_ls", 'clangd' }
+        for _, lsp in ipairs(servers) do
+          lspconfig[lsp].setup {
+            capabilities = capabilities,
+          }
+        end
+      EOF
+    '';
   };
 }
 
