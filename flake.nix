@@ -45,7 +45,7 @@
   };
 
   outputs =
-    { nixpkgs, self, ... }@inputs:
+    { nixpkgs, self, nvf, ... }@inputs:
     let
       username = "arkatosh";
       system = "x86_64-linux";
@@ -67,7 +67,10 @@
         #};
         laptop = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ ./hosts/laptop ];
+          modules = [ 
+	  	./hosts/laptop
+		nvf.nixosModules.default
+	  ];
           specialArgs = {
             host = "laptop";
             inherit self inputs username;

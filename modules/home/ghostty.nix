@@ -13,7 +13,7 @@ in
   xdg.configFile."ghostty/config".text = ''
     # Font
     font-family = "Hack Nerd Font"
-    font-size = ${if (host == "laptop") then "16" else "17"}
+    font-size = ${if (host == "laptop") then "10" else "17"}
     font-thicken = true
     font-feature = ss01
     font-feature = ss04

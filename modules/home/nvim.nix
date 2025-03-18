@@ -5,40 +5,44 @@
   programs.neovim = {
     enable = true;
     vimAlias = true;
+    viAlias = true;
   };
 
   programs.nvf = {
-    enable = false;
+    enable = true;
 
     settings.vim = {
       vimAlias = true;
       viAlias = true;
 
+      ## 🌙 Theme & UI
       theme = {
         enable = true;
-        name = "gruvbox";
-        style = "dark";
-        transparent = true;
+        name = "tokyonight"; # Alternatives: "gruvbox", "catppuccin"
+        style = "storm";      # "storm", "night", "day"
+        transparent = false;
       };
 
+      statusline.lualine.enable = true;
+
+      ## 🔍 Navigation (Removed `luaConfig`)
       telescope.enable = true;
+      which-key.enable = true;
 
-      spellcheck = {
-        enable = true;
-      };
-
+      ## 🔧 LSP
       lsp = {
         formatOnSave = true;
-        lspkind.enable = false;
+        lspkind.enable = true;
         lightbulb.enable = true;
-        lspsaga.enable = false;
+        lspsaga.enable = true;
         trouble.enable = true;
         lspSignature.enable = true;
-        otter-nvim.enable = false;
-        lsplines.enable = false;
-        nvim-docs-view.enable = false;
       };
 
+      treesitter.enable = true;
+      treesitter.autoInstall = true;
+
+      ## 📝 Programming Languages
       languages = {
         enableLSP = true;
         enableFormat = true;
@@ -47,100 +51,45 @@
 
         nix.enable = true;
         clang.enable = true;
-        zig.enable = true;
         python.enable = true;
+        lua.enable = true;
+        bash.enable = true;
+        rust.enable = true;
       };
 
-      visuals = {
-        # nvim-web-devicons.enable = true;
-        nvim-cursorline.enable = true;
-        cinnamon-nvim.enable = true;
-        fidget-nvim.enable = true;
+      ## 📦 Manually Adding Plugins
+      extraPlugins = [
+        pkgs.vimPlugins.nvim-cmp
+        pkgs.vimPlugins.cmp-nvim-lsp
+        pkgs.vimPlugins.cmp-buffer
+        pkgs.vimPlugins.cmp-path
+        pkgs.vimPlugins.cmp-cmdline
+        pkgs.vimPlugins.luasnip
+        pkgs.vimPlugins.nvim-autopairs
+        pkgs.vimPlugins.lspkind-nvim
+        pkgs.vimPlugins.comment-nvim
+        pkgs.vimPlugins.gitsigns-nvim
+        pkgs.vimPlugins.todo-comments-nvim
+        pkgs.vimPlugins.harpoon
+        pkgs.vimPlugins.neo-tree-nvim
+        pkgs.vimPlugins.telescope-fzf-native-nvim  # Added FZF extension manually
+      ];
 
-        highlight-undo.enable = true;
-        indent-blankline.enable = true;
-
-        # Fun
-        # cellular-automaton.enable = false;
-      };
-
-      statusline = {
-        lualine = {
-          enable = true;
-          theme = "gruvbox";
-        };
-      };
-
-      autopairs.nvim-autopairs.enable = true;
-
-      autocomplete.nvim-cmp.enable = true;
-      snippets.luasnip.enable = true;
-
-      tabline = {
-        nvimBufferline.enable = true;
-      };
-
-      treesitter.context.enable = true;
-
-      binds = {
-        whichKey.enable = true;
-        cheatsheet.enable = true;
-      };
-
-      git = {
-        enable = true;
-        gitsigns.enable = true;
-        gitsigns.codeActions.enable = false; # throws an annoying debug message
-      };
-
-      dashboard = {
-        dashboard-nvim.enable = true;
-        alpha.enable = true;
-      };
-
-      notify = {
-        nvim-notify.enable = true;
-      };
-
-      utility = {
-        ccc.enable = false;
-        vim-wakatime.enable = false;
-        icon-picker.enable = false;
-        surround.enable = false;
-        diffview-nvim.enable = true;
-        motion = {
-          hop.enable = true;
-          leap.enable = true;
-          precognition.enable = false;
-        };
-
-        images = {
-          image-nvim.enable = false;
-        };
-      };
-
-      ui = {
-        borders.enable = true;
-        noice.enable = true;
-        colorizer.enable = true;
-        illuminate.enable = true;
-        breadcrumbs = {
-          enable = false;
-          navbuddy.enable = false;
-        };
-        smartcolumn = {
-          enable = true;
-        };
-        fastaction.enable = true;
-      };
-
-      session = {
-        nvim-session-manager.enable = false;
-      };
-
-      comments = {
-        comment-nvim.enable = true;
-      };
+      ## ✅ Corrected Lua Config (Replaced `luaConfig` with `extraConfigLuaPost`)
+      extraConfigLuaPost = ''
+        require('telescope').setup{
+          extensions = {
+            fzf = {
+              fuzzy = true,
+              override_generic_sorter = true,
+              override_file_sorter = true,
+              case_mode = "smart_case",
+            }
+          }
+        }
+        require('telescope').load_extension('fzf')
+      '';
     };
   };
 }
+
