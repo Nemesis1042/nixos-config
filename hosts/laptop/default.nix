@@ -15,7 +15,6 @@
     fprintd-tod
   ];
 
-  virtualisation.waydroid.enable = true;
 
   services = {
     mysql = {
