@@ -61,6 +61,7 @@ in
     masterpdfeditor
     alacritty
     vscode
+    neofetch
 
     ## CLI 
     cbonsai                           # terminal screensaver
