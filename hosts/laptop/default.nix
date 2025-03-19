@@ -1,5 +1,4 @@
-{ pkgs, config, lib, ... }:
-{
+{ pkgs, config, lib, ... }:{
   imports = [
     ./hardware-configuration.nix
     ./../../modules/core
@@ -14,6 +13,8 @@
     powertop
     fprintd
     fprintd-tod
+    xdg-desktop-portal
+    xdg-desktop-portal-hyprland
   ];
 
 
