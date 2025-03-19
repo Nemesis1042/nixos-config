@@ -7,6 +7,7 @@ in
     _2048
 
     ## CLI utility
+    nodejs
     ani-cli
     binsider
     bitwise                           # cli tool for bit / hex manipulation

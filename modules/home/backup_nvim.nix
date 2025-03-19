@@ -1,146 +1,129 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
-  imports = [ inputs.nvf.homeManagerModules.default ];
-
   programs.neovim = {
     enable = true;
-    vimAlias = true;
-  };
 
-  programs.nvf = {
-    enable = false;
+    plugins = with pkgs.vimPlugins; [
+      # Theme
+      tokyonight-nvim
 
-    settings.vim = {
-      vimAlias = true;
-      viAlias = true;
+      # Syntax Highlighting
+      nvim-treesitter.withAllGrammars
 
-      theme = {
-        enable = true;
-        name = "gruvbox";
-        style = "dark";
-        transparent = true;
-      };
+      # Fuzzy Finder
+      telescope-nvim
+      telescope-fzf-native-nvim
 
-      telescope.enable = true;
+      # Autovervollständigung
+      nvim-cmp
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      cmp-cmdline
+      luasnip
+      cmp_luasnip
 
-      spellcheck = {
-        enable = true;
-      };
+      # Statuszeile
+      lualine-nvim
 
-      lsp = {
-        formatOnSave = true;
-        lspkind.enable = false;
-        lightbulb.enable = true;
-        lspsaga.enable = false;
-        trouble.enable = true;
-        lspSignature.enable = true;
-        otter-nvim.enable = false;
-        lsplines.enable = false;
-        nvim-docs-view.enable = false;
-      };
+      # LSP & Tools
+      mason-nvim
+      mason-lspconfig-nvim
+      nvim-lspconfig
 
-      languages = {
-        enableLSP = true;
-        enableFormat = true;
-        enableTreesitter = true;
-        enableExtraDiagnostics = true;
+      # Dateiexplorer
+      nvim-tree-lua
 
-        nix.enable = true;
-        clang.enable = true;
-        zig.enable = true;
-        python.enable = true;
-      };
+      # Git Integration
+      gitsigns-nvim
 
-      visuals = {
-        # nvim-web-devicons.enable = true;
-        nvim-cursorline.enable = true;
-        cinnamon-nvim.enable = true;
-        fidget-nvim.enable = true;
+      # Einfaches Kommentieren
+      comment-nvim
 
-        highlight-undo.enable = true;
-        indent-blankline.enable = true;
+      # Keybindings Übersicht
+      which-key-nvim
+    ];
 
-        # Fun
-        # cellular-automaton.enable = false;
-      };
+    extraConfig = ''
+      " Tokyonight aktivieren
+      colorscheme tokyonight
 
-      statusline = {
-        lualine = {
-          enable = true;
-          theme = "gruvbox";
-        };
-      };
+      lua << EOF
+        require('tokyonight').setup({
+          style = "storm",
+          transparent = false,
+        })
 
-      autopairs.nvim-autopairs.enable = true;
+        require('lualine').setup {
+          options = { theme = 'tokyonight' },
+        }
 
-      autocomplete.nvim-cmp.enable = true;
-      snippets.luasnip.enable = true;
+        require('nvim-tree').setup {}
 
-      tabline = {
-        nvimBufferline.enable = true;
-      };
+        require('gitsigns').setup {}
 
-      treesitter.context.enable = true;
+        require('Comment').setup {}
 
-      binds = {
-        whichKey.enable = true;
-        cheatsheet.enable = true;
-      };
+        require('which-key').setup {}
 
-      git = {
-        enable = true;
-        gitsigns.enable = true;
-        gitsigns.codeActions.enable = false; # throws an annoying debug message
-      };
+        require('telescope').setup {
+          extensions = {
+            fzf = {
+              fuzzy = true,
+              override_generic_sorter = true,
+              override_file_sorter = true,
+              case_mode = "smart_case",
+            }
+          }
+        }
+        require('telescope').load_extension('fzf')
 
-      dashboard = {
-        dashboard-nvim.enable = true;
-        alpha.enable = true;
-      };
+        require('nvim-treesitter.configs').setup {
+          highlight = { enable = true },
+          indent = { enable = true },
+        }
 
-      notify = {
-        nvim-notify.enable = true;
-      };
+        local cmp = require'cmp'
+        local luasnip = require'luasnip'
 
-      utility = {
-        ccc.enable = false;
-        vim-wakatime.enable = false;
-        icon-picker.enable = false;
-        surround.enable = false;
-        diffview-nvim.enable = true;
-        motion = {
-          hop.enable = true;
-          leap.enable = true;
-          precognition.enable = false;
-        };
+        cmp.setup {
+          snippet = {
+            expand = function(args)
+              luasnip.lsp_expand(args.body)
+            end,
+          },
+          mapping = {
+            ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<C-e>'] = cmp.mapping.abort(),
+            ['<CR>'] = cmp.mapping.confirm({ select = true }),
+          },
+          sources = cmp.config.sources({
+            { name = 'nvim_lsp' },
+            { name = 'luasnip' },
+          }, {
+            { name = 'buffer' },
+            { name = 'path' },
+          })
+        }
 
-        images = {
-          image-nvim.enable = false;
-        };
-      };
+        require("mason").setup()
+        require("mason-lspconfig").setup({
+        ensure_installed = { "lua_ls", "pyright", "ts_ls" , "clangd" },
+        })
 
-      ui = {
-        borders.enable = true;
-        noice.enable = true;
-        colorizer.enable = true;
-        illuminate.enable = true;
-        breadcrumbs = {
-          enable = false;
-          navbuddy.enable = false;
-        };
-        smartcolumn = {
-          enable = true;
-        };
-        fastaction.enable = true;
-      };
+        local lspconfig = require('lspconfig')
+        local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-      session = {
-        nvim-session-manager.enable = false;
-      };
-
-      comments = {
-        comment-nvim.enable = true;
-      };
-    };
+        local servers = { 'lua_ls', 'pyright', "ts_ls", 'clangd' }
+        for _, lsp in ipairs(servers) do
+          lspconfig[lsp].setup {
+            capabilities = capabilities,
+          }
+        end
+      EOF
+    '';
   };
 }
+
