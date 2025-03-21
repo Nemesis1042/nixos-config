@@ -381,8 +381,7 @@
     };
 
     extraConfig = "
-      monitor=,preferred,auto,auto
-
+    monitor=eDP-1,preferred,auto,1.0
       xwayland {
         force_zero_scaling = true
       }
