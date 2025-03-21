@@ -22,7 +22,7 @@ in
     enable = true;
     font = {
       name = "hack";
-      size = 12;
+      size = 13;
     };
     theme = {
       name = "Colloid-Green-Dark-Gruvbox";
@@ -43,13 +43,13 @@ in
     cursorTheme = {
       name = "Bibata-Modern-Ice";
       package = pkgs.bibata-cursors;
-      size = 24;
+      size = 22;
     };
   };
 
   home.pointerCursor = {
     name = "Bibata-Modern-Ice";
     package = pkgs.bibata-cursors;
-    size = 24;
+    size = 22;
   };
 }
