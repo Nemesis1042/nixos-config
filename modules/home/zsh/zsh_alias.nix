@@ -47,6 +47,7 @@
       psv = "source .venv/bin/activate";
 
       install= "nvim /home/arkatosh/nixos-config/modules/home/packages.nix";
+      wifi= "nmtui";
     };
   };
 }
