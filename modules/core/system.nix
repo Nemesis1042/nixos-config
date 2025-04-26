@@ -27,16 +27,31 @@
     };
   };
   nixpkgs = {
-    overlays = [ inputs.nur.overlays.default ];
+    overlays = [ inputs.nur.overlays.default 
+     (final: prev: {
+      set-dynamic-timezone = prev.writeShellScriptBin "set-dynamic-timezone" ''
+        #!${prev.runtimeShell}
+        ZONE=$(curl -s https://ipapi.co/timezone)
+        if [[ -n "$ZONE" ]]; then
+          echo "Setting timezone to $ZONE"
+          timedatectl set-timezone "$ZONE"
+        else
+          echo "Could not determine timezone"
+        fi
+      '';
+    })
+
+    ];
   };
 
   environment.systemPackages = with pkgs; [
     wget
     git
+    set-dynamic-timezone 
   ];
 
-  #time.timeZone = "auto";
-  #services.timesyncd.enable = true;
+  time.timeZone = "auto";
+  services.timesyncd.enable = true;
   i18n.defaultLocale = "en_US.UTF-8";
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "24.05";
