@@ -50,7 +50,7 @@
     set-dynamic-timezone 
   ];
 
-  time.timeZone = "auto";
+  #time.timeZone = "UTZ";
   services.timesyncd.enable = true;
   i18n.defaultLocale = "en_US.UTF-8";
   nixpkgs.config.allowUnfree = true;
