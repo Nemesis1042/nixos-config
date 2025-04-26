@@ -60,6 +60,10 @@ let
   power-menu = pkgs.writeScriptBin "power-menu" (
     builtins.readFile ./scripts/power-menu.sh
   );
+  set-dynamic-timezone = pkgs.writeScriptBin "set-dynamic-timezone" (
+    builtins.readFile ./scripts/set-dynamic-timezone.sh
+  );
+
 in
 {
   home.packages = with pkgs; [
@@ -93,5 +97,6 @@ in
 
     rofi-power-menu
     power-menu
+    set-dynamic-timezone
   ];
 }
