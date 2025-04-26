@@ -103,6 +103,11 @@ in
     # Python
     python3
     python312Packages.ipython
+    
+    #Code
+    php 
+    
+    
 
 
     #brave
@@ -111,7 +116,7 @@ in
     steam
     nextcloud-client
     
-
+    #Hack
     nmap
     theharvester
     sqlmap
