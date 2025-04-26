@@ -25,14 +25,13 @@
     '';
   };
     systemd.services.set-dynamic-timezone = {
-    description = "Set timezone dynamically using GeoIP";
-    after = [ "network-online.target" ];
-    wants = [ "network-online.target" ];
+    description = "Set Dynamic Timezone Based on IP";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.set-dynamic-timezone}/bin/set-dynamic-timezone";
+       Type = "oneshot";
+       ExecStart = "${pkgs.set-dynamic-timezone}/bin/set-dynamic-timezone";
     };
+    
   };
 
 }
