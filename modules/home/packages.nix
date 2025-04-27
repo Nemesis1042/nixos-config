@@ -1,6 +1,14 @@
 { inputs, pkgs, ... }: 
 let 
   _2048 = pkgs.callPackage ../../pkgs/2048/default.nix {};
+  python = pkgs.python3;
+   fakeTyperSlim = python.pkgs.buildPythonPackage rec {
+    pname = "typer-slim";
+    version = "0.9.0"; # gleiche Version wie dein echtes typer
+    src = python.pkgs.typer.src; # nimm einfach den Source von echtem typer
+    doCheck = false;
+    pythonImportsCheck = [ "typer" ]; # prüft, dass typer importierbar ist
+  };
   mandown = pkgs.python3Packages.buildPythonApplication rec {
     pname = "mandown";
     version = "latest";
@@ -30,6 +38,7 @@ let
       natsort
       pillow
       python-slugify
+      fakeTyperSlim
       typer
     ];
 
