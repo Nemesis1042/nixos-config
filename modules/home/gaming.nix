@@ -13,7 +13,7 @@
     # inputs.nix-gaming.packages.${pkgs.system}.wine-ge
 
     ## Minecraft
-    # prismlauncher
+    prismlauncher
 
     ## Cli games
     _2048-in-terminal
@@ -26,7 +26,7 @@
 
     ## Doom
     # gzdoom
-    crispy-doom
+    #crispy-doom
 
     ## Emulation
     sameboy

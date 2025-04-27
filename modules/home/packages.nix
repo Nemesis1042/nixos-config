@@ -1,12 +1,26 @@
 { inputs, pkgs, ... }: 
 let 
-  _2048 = pkgs.callPackage ../../pkgs/2048/default.nix {}; 
+  _2048 = pkgs.callPackage ../../pkgs/2048/default.nix {};
+mandown = pkgs.python3Packages.buildPythonPackage rec {
+    pname = "mandown";
+    version = "latest";  # Wenn du die neueste Version möchtest, sonst kannst du hier eine spezifische Version angeben
+    src = pkgs.fetchFromGitHub {
+      owner = "potatoeggy";
+      repo = "mandown";
+      rev = "main";
+      #sha256 = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";  # Ersetze dies durch den SHA256-Hash, den du berechnet hast
+    };
+  };
 in
 {
   home.packages = (with pkgs; [
     _2048
+    mandown
 
     ## CLI utility
+    hydra 
+    nix-prefetch-git 
+    nix-prefetch-scripts
     nodejs
     ani-cli
     binsider

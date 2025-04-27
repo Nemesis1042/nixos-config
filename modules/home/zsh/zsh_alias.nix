@@ -48,6 +48,7 @@
 
       install= "nvim /home/arkatosh/nixos-config/modules/home/packages.nix";
       wifi= "nmtui";
+      timezone= "cd /home/arkatosh/nixos-config/modules/home/scripts/scripts && ./set-dynamic-timezone.sh";
     };
   };
 }
