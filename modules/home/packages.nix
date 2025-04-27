@@ -1,15 +1,39 @@
 { inputs, pkgs, ... }: 
 let 
   _2048 = pkgs.callPackage ../../pkgs/2048/default.nix {};
-mandown = pkgs.python3Packages.buildPythonPackage rec {
+  mandown = pkgs.python3Packages.buildPythonApplication rec {
     pname = "mandown";
-    version = "latest";  # Wenn du die neueste Version möchtest, sonst kannst du hier eine spezifische Version angeben
+    version = "latest";
+
     src = pkgs.fetchFromGitHub {
       owner = "potatoeggy";
       repo = "mandown";
       rev = "main";
-      #sha256 = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";  # Ersetze dies durch den SHA256-Hash, den du berechnet hast
+      sha256 = "0411mqks1r9rkpzzc430yp0jr5wpq8s55awk8g8rk4wxa2q3zakl";
     };
+
+    format = "pyproject";
+
+    nativeBuildInputs = with pkgs.python3Packages; [
+      poetry-core
+    ];
+
+    propagatedBuildInputs = with pkgs.python3Packages; [
+      requests
+      beautifulsoup4
+      rich
+      click
+      comicon
+      feedparser
+      filetype
+      lxml
+      natsort
+      pillow
+      python-slugify
+      typer
+    ];
+
+    doCheck = false;
   };
 in
 {
