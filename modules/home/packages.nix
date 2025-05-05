@@ -41,12 +41,10 @@ in
 {
   home.packages = (with pkgs; [
     _2048
-    #mandown
+    mandown
 
     ## CLI utility
     hydra 
-    nix-prefetch-git 
-    nix-prefetch-scripts
     nodejs
     ani-cli
     binsider
