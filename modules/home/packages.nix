@@ -41,7 +41,6 @@ in
 {
   home.packages = (with pkgs; [
     _2048
-    mandown
 
     ## CLI utility
     hydra 
@@ -141,6 +140,7 @@ in
     # Python
     python3
     python312Packages.ipython
+    virtualenv
     
     #Code
     php 
