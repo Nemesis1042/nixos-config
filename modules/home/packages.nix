@@ -32,7 +32,7 @@ let
       natsort
       pillow
       python-slugify
-      #typer
+      typer
     ];
 
     doCheck = false;
@@ -41,7 +41,7 @@ in
 {
   home.packages = (with pkgs; [
     _2048
-    mandown
+    #mandown
 
     ## CLI utility
     hydra 
@@ -146,7 +146,7 @@ in
     
     #Code
     php 
-    
+    poetry 
     
 
 
