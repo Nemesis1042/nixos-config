@@ -61,6 +61,8 @@
           packages = [
             (pkgs.python312.withPackages (ps: with ps; [
               numpy
+	      pandas
+	      Flask
               # add more if needed
             ]))
             pkgs.gcc
