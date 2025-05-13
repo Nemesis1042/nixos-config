@@ -60,9 +60,10 @@
         default = pkgs.mkShell {
           packages = [
             (pkgs.python312.withPackages (ps: with ps; [
-              numpy
-	      pandas
-	      Flask
+              pkgs.python3
+      	      pkgs.python3Packages.flask
+              pkgs.python3Packages.pandas
+              pkgs.python3Packages.numpy
               # add more if needed
             ]))
             pkgs.gcc
