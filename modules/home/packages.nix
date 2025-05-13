@@ -33,6 +33,9 @@ let
       pillow
       python-slugify
       typer
+      gcc.cc
+      numpy
+      Flask
     ];
 
     doCheck = false;
