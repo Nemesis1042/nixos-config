@@ -68,12 +68,17 @@
           requests
           ipython
           black
+	  scipy
+	 jupyter
+	  seaborn
+
          ]))
           pkgs.gcc
          ];
 
         shellHook = ''
           echo "[Lagerbank2024] Python dev environment ready."
+	  cd /home/arkatosh/Documents/GIT
           '';
   	};
       };
