@@ -58,21 +58,24 @@
     {
       devShells.${system} = {
         default = pkgs.mkShell {
-          packages = [
-            (pkgs.python312.withPackages (ps: with ps; [
-              pkgs.python3
-      	      pkgs.python3Packages.flask
-              pkgs.python3Packages.pandas
-              pkgs.python3Packages.numpy
-              # add more if needed
-            ]))
-            pkgs.gcc
-          ];
+         packages = [
+          (pkgs.python312.withPackages (ps: with ps; [
+          flask
+          pandas
+          numpy
+          sympy
+          matplotlib
+          requests
+          ipython
+          black
+         ]))
+          pkgs.gcc
+         ];
 
-          shellHook = ''
-            echo "[Lagerbank2024] Python dev environment ready."
+        shellHook = ''
+          echo "[Lagerbank2024] Python dev environment ready."
           '';
-        };
+  	};
       };
 
       nixosConfigurations = {
