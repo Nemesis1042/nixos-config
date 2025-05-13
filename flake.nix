@@ -86,4 +86,21 @@
         #};
       };
     };
+  devShells = {
+  ${system}.default = pkgs.mkShell {
+    packages = [
+      (pkgs.python312.withPackages (ps: with ps; [
+        numpy
+        # optional: add pandas, matplotlib, etc.
+      ]))
+      pkgs.gcc  # ensures libstdc++.so.6 is available
+    ];
+
+    shellHook = ''
+      echo "[Lagerbank2024] Python dev environment ready."
+      echo "Run with: python3 app.py"
+    '';
+  };
+};
+
 }
