@@ -105,6 +105,8 @@ in
     neofetch
     openjdk17
     netbeans
+    glib
+    gvfs
 
     ## CLI 
     cbonsai                           # terminal screensaver
