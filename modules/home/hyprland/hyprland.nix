@@ -1,32 +1,39 @@
 { inputs, pkgs, ... }:
-{
+
+let
+  grimblast = inputs.hypr-contrib.packages.${pkgs.system}.grimblast;
+  hyprmag = inputs.hyprmag.packages.${pkgs.system}.hyprmag;
+in {
   home.packages = with pkgs; [
     swww
-    inputs.hypr-contrib.packages.${pkgs.system}.grimblast
+    grimblast
     hyprpicker
-    inputs.hyprmag.packages.${pkgs.system}.hyprmag
+    hyprmag
     grim
     slurp
     wl-clip-persist
     cliphist
     wf-recorder
-    glib
-    wayland
     direnv
+    xdg-utils
+    mako
+    playerctl
   ];
+
+  xdg = {
+    enable = true;
+    autostart.enable = true;
+  };
+
   systemd.user.targets.hyprland-session.Unit.Wants = [
     "xdg-desktop-autostart.target"
   ];
+
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.default;
-    portalPackage =
-      inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
-    xwayland = {
-      enable = true;
-      # hidpi = true;
-    };
-    # enableNvidiaPatches = false;
+    xwayland.enable = true;
     systemd.enable = true;
   };
 }
+

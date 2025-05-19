@@ -103,6 +103,8 @@ in
     alacritty
     vscode
     neofetch
+    openjdk17
+    netbeans
 
     ## CLI 
     cbonsai                           # terminal screensaver

@@ -14,7 +14,6 @@
     fprintd
     fprintd-tod
     xdg-desktop-portal
-    xdg-desktop-portal-hyprland
   ];
 
 
