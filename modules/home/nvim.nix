@@ -31,6 +31,10 @@
       nvim-surround
       nvim-notify
       noice-nvim
+      nvim-dap
+      nvim-dap-ui
+      bufferline-nvim
+      auto-session
     ];
   };
 
@@ -39,5 +43,3 @@
   xdg.configFile."nvim/plugins.lua".source = ./nvim/plugins.lua;
   xdg.configFile."nvim/ui.lua".source = ./nvim/ui.lua;
 }
-
-

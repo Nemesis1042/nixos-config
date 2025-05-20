@@ -26,6 +26,7 @@ require('which-key').setup {}
 require('nvim-autopairs').setup {}
 require('nvim-surround').setup {}
 require("ibl").setup {}
+
 require("toggleterm").setup {
   open_mapping = [[<c-\>]],
   direction = 'horizontal',
