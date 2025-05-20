@@ -95,6 +95,7 @@ in
     wavemon                           # monitoring for wireless network devices
     wl-clipboard                      # clipboard utils for wayland (wl-copy, wl-paste)
     wget
+    lftp
     woomer
     yt-dlp-light
     xdg-utils

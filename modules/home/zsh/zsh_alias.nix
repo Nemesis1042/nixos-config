@@ -31,6 +31,9 @@
       l = "eza --icons  -a --group-directories-first -1"; # EZA_ICON_SPACING=2
       ll = "eza --icons  -a --group-directories-first -1 --no-user --long";
       tree = "eza --icons --tree --group-directories-first";
+      ftpdown='/home/arkatosh/Documents/GIT/hardwig-holzgerlingen.com/scripts/sync-ftp.sh download';
+      ftpup='/home/arkatosh/Documents/GIT/hardwig-holzgerlingen.com/scripts/sync-ftp.sh upload';
+
 
       # Nixos
       cdnix = "cd ~/nixos-config && codium ~/nixos-config";
