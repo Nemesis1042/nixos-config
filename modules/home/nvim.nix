@@ -62,7 +62,19 @@
         })
 
         require('lualine').setup {
-          options = { theme = 'tokyonight' },
+          options = { 
+	  	theme = "tokyonight",
+		section_separators = "";
+      		component_separators = ""
+    	  },
+    	  sections = {
+      	    lualine_a = {'mode'},
+      	    lualine_b = { safe_branch },
+      	    lualine_c = {'filename'},
+      	    lualine_x = {'encoding', 'fileformat', 'filetype'},
+      	    lualine_y = {'progress'},
+      	    lualine_z = {'location'}
+	  },
         }
 
         require('nvim-tree').setup {}
