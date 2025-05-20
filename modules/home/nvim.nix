@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 {
   programs.neovim = {
     enable = true;
@@ -39,7 +37,10 @@
   };
 
   xdg.configFile."nvim/init.lua".source = ./nvim/init.lua;
-  xdg.configFile."nvim/lsp.lua".source = ./nvim/lsp.lua;
-  xdg.configFile."nvim/plugins.lua".source = ./nvim/plugins.lua;
-  xdg.configFile."nvim/ui.lua".source = ./nvim/ui.lua;
+  xdg.configFile."nvim/lua/lsp.lua".source = ./nvim/lua/lsp.lua;
+  xdg.configFile."nvim/lua/plugins.lua".source = ./nvim/lua/plugins.lua;
+  xdg.configFile."nvim/lua/ui.lua".source = ./nvim/lua/ui.lua;
+  xdg.configFile."nvim/lua/test.lua".source = ./nvim/lua/test.lua;
+  xdg.configFile."nvim/lua/dap.lua".source = ./nvim/lua/dap.lua;
 }
+
