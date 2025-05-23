@@ -2,7 +2,7 @@
 {
   programs = {
     steam = {
-      enable = false;
+      enable = true;
 
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = false;
@@ -11,7 +11,7 @@
 
       extraCompatPackages = [ pkgs.proton-ge-bin ];
     };
-
+    
     gamescope = {
       enable = true;
       capSysNice = true;

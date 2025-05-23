@@ -135,6 +135,7 @@ in
     winetricks
     wineWowPackages.wayland
     zenity
+    wlr-randr
 
     # C / C++
     gcc
