@@ -136,6 +136,8 @@ in
     wineWowPackages.wayland
     zenity
     wlr-randr
+    bluez
+    blueman
 
     # C / C++
     gcc
