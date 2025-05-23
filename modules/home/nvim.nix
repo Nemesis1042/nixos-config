@@ -1,3 +1,4 @@
+{config, pkgs, ...}:
 {
   programs.neovim = {
     enable = true;
@@ -33,6 +34,10 @@
       nvim-dap-ui
       bufferline-nvim
       auto-session
+      plenary-nvim
+      neotest
+      neotest-plenary
+      neotest-python # or other adapters depending on what you're testing
     ];
   };
 
