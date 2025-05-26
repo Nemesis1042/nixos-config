@@ -39,5 +39,6 @@
     ./yazi.nix                        # terminal file manager
     ./zsh                             # shell
     ./alacritty				#alacritty
+    ./php.nix				#php
   ];
 }

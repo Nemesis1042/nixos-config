@@ -1,37 +1,29 @@
 { config, pkgs, ... }:
 
 let
-  php = pkgs.phpPackages.php80;  # oder php81/php82 je nach Präferenz
+  php = pkgs.php;
 in
 {
-  # 1. Enable nginx + PHP-FPM
-  services.nginx = {
-    enable = true;
-    virtualHosts."example.com" = {
-      root = "/var/www/example";
-      index = "index.php";
-      extraConfig = ''
-        location ~ \.php$ {
-          fastcgi_pass   unix:/run/phpfpm.sock;
-          fastcgi_index  index.php;
-          include        fastcgi_params;
-          fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        }
-      '';
-    };
-  };
-
   services.phpfpm = {
     enable = true;
+    package = php;
+
     poolConfigs = {
       www = {
         user = "nginx";
         group = "nginx";
         listen = "/run/phpfpm.sock";
+
+        # PHP-FPM Prozess-Manager (pm) Einstellungen
+        mode = "dynamic";
+	max_children = 30;
+  	start_servers = 5;
+  	min_spare_servers = 2;
+  	max_spare_servers = 10;
       };
     };
-    package = php;
-    # Activate necessary extensions
+
+    # PHP Extensions
     extensions = with php.extensions; [
       pdo_mysql
       pdo_sqlite
@@ -39,54 +31,65 @@ in
       opcache
       fileinfo
     ];
+
+    # Globale PHP-Einstellungen (php.ini Werte)
+    settings = {
+      opcache.enable = true;
+      opcache.memory_consumption = 128;
+      opcache.validate_timestamps = true;
+      opcache.revalidate_freq = 2;
+    };
   };
 
-  # 2a. MariaDB (für MySQL-Workloads)
+  services.nginx = {
+    enable = true;
+
+    # Server für PHP-FPM
+    virtualHosts = {
+      "localhost" = {
+        root = "/var/www/html";
+        index = "index.php";
+
+        locations."/" = {
+          tryFiles = "$uri $uri/ /index.php?$query_string";
+        };
+
+        locations."\\.php$" = {
+          fastcgi = {
+            backend = "unix:/run/phpfpm.sock";
+            index = "index.php";
+            splitPath = "\\.php$";
+          };
+        };
+      };
+    };
+  };
+
+  # MariaDB (MySQL) Server aktivieren
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
-    initialScript = ''
-      CREATE DATABASE IF NOT EXISTS example CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-      CREATE USER IF NOT EXISTS 'example'@'localhost' IDENTIFIED BY 'securePwd';
-      GRANT ALL ON example.* TO 'example'@'localhost';
-      FLUSH PRIVILEGES;
-    '';
+
+    # Passwort für Root User, bitte anpassen!
+    rootPassword = "";
   };
 
-  # 2b. (Alternative) SQLite braucht keine Service-Konfiguration
-
-  # 3. Datei-Rechte & Web-Root
-  users.groups.www = { };
-  users.users.nginx = {
-    group = "www";
-    home = "/var/www";
-    createHome = false;
-  };
-  environment.etc."/var/www/example".source = /path/to/dein/php-app;
-
-  # 4. Composer global (für CLI)
-  environment.systemPackages = with pkgs; [
-    composer
-    nginx
-    mariadb
-    sqlite
+  # SQLite3 als CLI Tool, falls du es brauchst
+  environment.systemPackages = [
+    pkgs.sqlite
   ];
 
-  # 5. Security & Performance
-  services.phpfpm.settings = {
-    pm = "dynamic";
-    pm.max_children = 30;
-    pm.start_servers = 5;
-    pm.min_spare_servers = 2;
-    pm.max_spare_servers = 10;
-    opcache.enable = true;
-    opcache.memory_consumption = 128;
-    opcache.validate_timestamps = true;
-    opcache.revalidate_freq = 2;
+  # User und Gruppen für nginx, falls noch nicht existieren
+  users.users.nginx = {
+    isSystemUser = true;
+    group = "nginx";
+    createHome = false;
+    description = "nginx web server user";
   };
 
-  # 6. Future-Proofing
-  nix.package = pkgs.nixUnstable;      # Flakes-Ready
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  users.groups.nginx = {};
+
+  # Firewall-Ports öffnen (optional, falls aktiviert)
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
 }
 
