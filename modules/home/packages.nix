@@ -109,7 +109,7 @@ in
     glib
     gvfs
     docker-client
-    docker
+    
 
     ## CLI 
     cbonsai                           # terminal screensaver
