@@ -17,22 +17,20 @@
       ];
     };
 
-    fstrim.enable = true;
+    mysql = {
+      enable = true;
+      package = pkgs.mariadb;
+    };
+    
 
-    logind.extraConfig = ''
-      # don’t shutdown when power button is short-pressed
-      HandlePowerKey=ignore
-    '';
   };
-    systemd.services.set-dynamic-timezone = {
+  systemd.services.set-dynamic-timezone = {
     description = "Set Dynamic Timezone Based on IP";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-       Type = "oneshot";
-       ExecStart = "${pkgs.set-dynamic-timezone}/bin/set-dynamic-timezone";
+      Type = "oneshot";
+      ExecStart = "${pkgs.set-dynamic-timezone}/bin/set-dynamic-timezone";
     };
-    
   };
-
 }
 

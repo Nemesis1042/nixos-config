@@ -16,12 +16,12 @@
     xdg-desktop-portal
   ];
 
-
   services = {
     mysql = {
 	enable = true;
 	package = pkgs.mariadb;
     };
+  
     power-profiles-daemon.enable = true;
 
     upower = {
