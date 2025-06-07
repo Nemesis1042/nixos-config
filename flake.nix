@@ -44,22 +44,21 @@
     nvf.url = "github:notashelf/nvf";
   };
 
-  outputs =
-    { nixpkgs, self, nvf, ... }@inputs:
-    let
-      username = "arkatosh";
-      system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
-      lib = nixpkgs.lib;
-    in
-    {
-      devShells.${system} = {
-        default = pkgs.mkShell {
-         packages = [
-          (pkgs.python312.withPackages (ps: with ps; [
+  outputs = { nixpkgs, self, nvf, ... }@inputs:
+let
+  username = "arkatosh";
+  system = "x86_64-linux";
+  pkgs = import nixpkgs {
+    inherit system;
+    config.allowUnfree = true;
+  };
+  lib = nixpkgs.lib;
+in {
+  devShells.${system} = {
+    # Default Python-Dev-Umgebung
+    default = pkgs.mkShell {
+      packages = [
+        (pkgs.python312.withPackages (ps: with ps; [
           flask
           pandas
           numpy
@@ -68,20 +67,35 @@
           requests
           ipython
           black
-	  scipy
-	 jupyter
-	  seaborn
+          scipy
+          jupyter
+          seaborn
+        ]))
+        pkgs.gcc
+      ];
 
-         ]))
-          pkgs.gcc
-         ];
+      shellHook = ''
+        echo "[Lagerbank2024] Python dev environment ready."
+        cd /home/arkatosh/Documents/GIT
+      '';
+    };
 
-        shellHook = ''
-          echo "[Lagerbank2024] Python dev environment ready."
-	  cd /home/arkatosh/Documents/GIT
-          '';
-  	};
-      };
+    # Selenium-Umgebung
+    selenium = pkgs.mkShell {
+  packages = [
+    (pkgs.python312.withPackages (ps: with ps; [
+      selenium
+    ]))
+    pkgs.chromium
+     pkgs.chromedriver
+  ];
+
+  shellHook = ''
+    echo "[Selenium-Env] Python 3.12 + Selenium environment ready."
+  '';
+};
+  };
+
 
       nixosConfigurations = {
         #desktop = nixpkgs.lib.nixosSystem {

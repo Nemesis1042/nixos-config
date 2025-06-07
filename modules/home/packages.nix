@@ -46,6 +46,7 @@ in
     _2048
 
     ## CLI utility
+    python311Packages.pip
     hydra 
     nodejs
     ani-cli
