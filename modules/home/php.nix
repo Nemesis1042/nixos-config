@@ -1,7 +1,11 @@
 { config, pkgs, ... }:
 
 let
-  php = pkgs.php;
+  php = pkgs.php83.withExtensions (exts: [
+  pkgs.php83Extensions.mbstring
+  pkgs.php83Extensions.curl
+]);
+
 in
 {
 

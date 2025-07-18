@@ -3,6 +3,10 @@
 {
   services = {
     gvfs.enable = true;
+    openssh.enable = true;
+    openssh.permitRootLogin = "no";
+    openssh.passwordAuthentication = false;
+
 
     gnome = {
       tinysparql.enable = true;
@@ -16,7 +20,8 @@
         gnome-settings-daemon
       ];
     };
-
+    blueman.enable = true;
+  
    
     
 

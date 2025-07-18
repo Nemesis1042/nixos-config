@@ -2,50 +2,13 @@
 let 
   _2048 = pkgs.callPackage ../../pkgs/2048/default.nix {};
   python = pkgs.python3;
-
-  mandown = pkgs.python3Packages.buildPythonApplication rec {
-    pname = "mandown";
-    version = "latest";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "potatoeggy";
-      repo = "mandown";
-      rev = "main";
-      sha256 = "0411mqks1r9rkpzzc430yp0jr5wpq8s55awk8g8rk4wxa2q3zakl";
-    };
-
-    format = "pyproject";
-
-    nativeBuildInputs = with pkgs.python3Packages; [
-      poetry-core
-    ];
-
-    propagatedBuildInputs = with pkgs.python3Packages; [
-      requests
-      beautifulsoup4
-      rich
-      click
-      comicon
-      feedparser
-      filetype
-      lxml
-      natsort
-      pillow
-      python-slugify
-      typer
-      gcc.cc
-      numpy
-      Flask
-    ];
-
-    doCheck = false;
-  };
 in
 {
   home.packages = (with pkgs; [
     _2048
 
     ## CLI utility
+    pyenv
     python311Packages.pip
     hydra 
     nodejs
@@ -110,7 +73,9 @@ in
     glib
     gvfs
     docker-client
-    
+    zip
+    php
+    php83Packages.composer
 
     ## CLI 
     cbonsai                           # terminal screensaver
