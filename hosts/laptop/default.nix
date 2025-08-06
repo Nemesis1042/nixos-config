@@ -14,6 +14,7 @@
     fprintd
     fprintd-tod
     xdg-desktop-portal
+    (python3.withPackages (ps: [ ps.numpy ]))
   ];
 
   services = {

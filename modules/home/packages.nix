@@ -82,7 +82,9 @@ in
     cmatrix
     pipes                             # terminal screensaver
     sl
-    tty-clock                         # cli clock
+    tty-clock                         # cli tty-clock
+    inkscape
+
 
     ## GUI Apps
     audacity
@@ -147,7 +149,9 @@ in
     wifite2
     wireshark
     sherlock
-
+    
+    #Other stuff
+    localsend
 
     inputs.alejandra.defaultPackage.${system}
   ]);

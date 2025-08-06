@@ -4,9 +4,13 @@
   services = {
     gvfs.enable = true;
     openssh.enable = true;
-    openssh.permitRootLogin = "no";
-    openssh.passwordAuthentication = false;
+    openssh.settings.PermitRootLogin = "yes";
+    openssh.settings.PasswordAuthentication = true;
 
+    printing.enable = true;
+    avahi.enable = true;   # For network printer discovery
+    avahi.nssmdns4 = true;  # Helps with mDNS (Bonjour)
+    printing.drivers = [ pkgs.hplip ];
 
     gnome = {
       tinysparql.enable = true;

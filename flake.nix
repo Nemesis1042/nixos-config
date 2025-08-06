@@ -69,7 +69,6 @@ in {
           black
           scipy
           jupyter
-          seaborn
         ]))
         pkgs.gcc
       ];
