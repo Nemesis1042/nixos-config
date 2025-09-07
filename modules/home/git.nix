@@ -27,15 +27,25 @@
   # SSH-Agent aktivieren für Git-SSH-Zugriff
   programs.ssh = {
     enable = true;
-    extraConfig = ''
-      Host github.com
-        IdentityFile ~/.ssh/id_rsa
-        User git
-        StrictHostKeyChecking no
-    '';
-  }; 
+    enableDefaultConfig = false;
 
-  home.packages = [ pkgs.gh pkgs.openssh]; # pkgs.git-lfs
+    matchBlocks = {
+      "*" = {
+        forwardAgent = false;
+        forwardX11 = false;
+      };
+
+      "github.com" = {
+  	identityFile = "~/.ssh/id_rsa";
+  	user = "git";
+  	extraOptions = {
+    	  StrictHostKeyChecking = "no";
+        };
+      };
+    };
+  };
+
+  home.packages = [ pkgs.gh pkgs.openssh ]; # pkgs.git-lfs
 
   programs.zsh.shellAliases = {
     g = "lazygit";
@@ -64,3 +74,4 @@
     glols = "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --stat";
   };
 }
+

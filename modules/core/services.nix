@@ -25,11 +25,12 @@
       ];
     };
     blueman.enable = true;
-  
-   
-    
-
   };
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
   systemd.services.set-dynamic-timezone = {
     description = "Set Dynamic Timezone Based on IP";
     wantedBy = [ "multi-user.target" ];

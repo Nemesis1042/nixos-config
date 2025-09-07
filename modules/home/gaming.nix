@@ -21,8 +21,8 @@
     nethack
 
     ## Celeste
-    celeste-classic
-    celeste-classic-pm
+    #celeste-classic
+    #celeste-classic-pm
 
     ## Doom
     # gzdoom

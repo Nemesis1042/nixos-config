@@ -11,7 +11,7 @@ in
     pyenv
     python311Packages.pip
     hydra 
-    nodejs
+    nodejs_20
     ani-cli
     binsider
     bitwise                           # cli tool for bit / hex manipulation
@@ -76,6 +76,10 @@ in
     zip
     php
     php83Packages.composer
+    chromium
+    tor-browser
+    sqlitebrowser
+
 
     ## CLI 
     cbonsai                           # terminal screensaver
@@ -84,7 +88,8 @@ in
     sl
     tty-clock                         # cli tty-clock
     inkscape
-
+    ollama
+    signal-cli
 
     ## GUI Apps
     audacity
