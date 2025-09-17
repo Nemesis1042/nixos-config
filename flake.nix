@@ -1,5 +1,5 @@
 {
-  description = "FrostPhoenix's nixos configuration";
+  description = "FrostPhoenix's nixos configuration + CashApp DevShell";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -45,86 +45,76 @@
   };
 
   outputs = { nixpkgs, self, nvf, ... }@inputs:
-let
-  username = "arkatosh";
-  system = "x86_64-linux";
-  pkgs = import nixpkgs {
-    inherit system;
-    config.allowUnfree = true;
-  };
-  lib = nixpkgs.lib;
-in {
-  devShells.${system} = {
-    # Default Python-Dev-Umgebung
-    default = pkgs.mkShell {
-      packages = [
-        (pkgs.python312.withPackages (ps: with ps; [
-          flask
-          pandas
-          numpy
-          sympy
-          matplotlib
-          requests
-          ipython
-          black
-          scipy
-          jupyter
-        ]))
-        pkgs.gcc
-      ];
-
-      shellHook = ''
-        echo "[Lagerbank2024] Python dev environment ready."
-        cd /home/arkatosh/Documents/GIT
-      '';
+  let
+    username = "arkatosh";
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
     };
+    lib = nixpkgs.lib;
+  in {
+    devShells.${system} = {
+      # Python-Umgebung
+      default = pkgs.mkShell {
+        packages = [
+          (pkgs.python312.withPackages (ps: with ps; [
+            flask pandas numpy sympy matplotlib requests ipython black scipy jupyter
+          ]))
+          pkgs.gcc
+        ];
+        shellHook = ''
+          echo "[Lagerbank2024] Python dev environment ready."
+          cd /home/arkatosh/Documents/GIT
+        '';
+      };
 
-    # Selenium-Umgebung
-    selenium = pkgs.mkShell {
-  packages = [
-    (pkgs.python312.withPackages (ps: with ps; [
-      selenium
-    ]))
-    pkgs.chromium
-     pkgs.chromedriver
-  ];
+      # Selenium-Umgebung
+      selenium = pkgs.mkShell {
+        packages = [
+          (pkgs.python312.withPackages (ps: with ps; [ selenium ]))
+          pkgs.chromium
+          pkgs.chromedriver
+        ];
+        shellHook = ''
+          echo "[Selenium-Env] Python 3.12 + Selenium environment ready."
+        '';
+      };
 
-  shellHook = ''
-    echo "[Selenium-Env] Python 3.12 + Selenium environment ready."
-  '';
-};
-  };
-
-
-      nixosConfigurations = {
-        #desktop = nixpkgs.lib.nixosSystem {
-        #  inherit system;
-        # modules = [ ./hosts/desktop ];
-        # specialArgs = {
-        #   host = "desktop";
-        #   inherit self inputs username;
-        # };
-        #};
-        laptop = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [ 
-	  	./hosts/laptop
-		nvf.nixosModules.default
-	  ];
-          specialArgs = {
-            host = "laptop";
-            inherit self inputs username;
-          };
-        };
-        #vm = nixpkgs.lib.nixosSystem {
-        #  inherit system;
-        #  modules = [ ./hosts/vm ];
-        #  specialArgs = {
-        #    host = "vm";
-        #    inherit self inputs username;
-        #  };
-        #};
+      # CashApp (Electron + React + SQLite)
+      cashapp = pkgs.mkShell {
+        packages = with pkgs; [
+          nodejs_22
+          pnpm
+          git
+          python3
+          gcc
+          make
+          pkg-config
+          zlib
+          libusb1
+          sqlite
+        ];
+        shellHook = ''
+          echo "🛠️ CashApp DevShell bereit"
+          echo "Nutze 'pnpm install' um die Node-Abhängigkeiten zu installieren."
+        '';
       };
     };
 
+    nixosConfigurations = {
+      laptop = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./hosts/laptop
+          nvf.nixosModules.default
+        ];
+        specialArgs = {
+          host = "laptop";
+          inherit self inputs username;
+        };
+      };
+    };
+  };
 }
+

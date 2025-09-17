@@ -68,7 +68,6 @@ in
     alacritty
     vscode
     neofetch
-    openjdk17
     netbeans
     glib
     gvfs
@@ -79,6 +78,10 @@ in
     chromium
     tor-browser
     sqlitebrowser
+    scenic-view
+    #flutter 
+    android-studio
+    maven
 
 
     ## CLI 
@@ -157,6 +160,27 @@ in
     
     #Other stuff
     localsend
+
+    #Kasse
+    openjdk
+    openjfx
+    gtk3
+    glib
+    xorg.libXxf86vm
+    mesa
+    xorg.libX11
+    xorg.libXext
+    xorg.libXrender
+    xorg.libXtst
+    xorg.libXi
+    xorg.libXrandr
+    xorg.libXcursor
+    xorg.libXinerama
+    xorg.libXfixes
+    xorg.libXdamage
+    xorg.libXcomposite
+    xorg.libXScrnSaver
+    libGL
 
     inputs.alejandra.defaultPackage.${system}
   ]);
