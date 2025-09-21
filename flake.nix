@@ -89,7 +89,7 @@
           git
           python3
           gcc
-          make
+          gnumake
           pkg-config
           zlib
           libusb1

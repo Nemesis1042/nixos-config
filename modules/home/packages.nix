@@ -11,7 +11,7 @@ in
     pyenv
     python311Packages.pip
     hydra 
-    nodejs_20
+    nodejs_22
     ani-cli
     binsider
     bitwise                           # cli tool for bit / hex manipulation
@@ -82,7 +82,28 @@ in
     #flutter 
     android-studio
     maven
+    pnpm
+    pkg-config
+    libusb1
+    systemd.dev
+    go
+    usbutils
+    epson-escpr
+    gutenprint
 
+
+
+    # Electron runtime libs
+    glib
+    gtk3
+    nss
+    alsa-lib
+    xorg.libX11
+    xorg.libXcursor
+    xorg.libXrandr
+    xorg.libXcomposite
+    xorg.libXi
+    xorg.libXtst
 
     ## CLI 
     cbonsai                           # terminal screensaver
@@ -93,6 +114,7 @@ in
     inkscape
     ollama
     signal-cli
+    systemd
 
     ## GUI Apps
     audacity
