@@ -3,28 +3,29 @@
   programs.git = {
     enable = true;
 
-    userName = "Nemesis1042";
-    userEmail = "niklashardwig5@gmail.com";
+    settings = {
+      user.name = "Nemesis1042";
+      user.email = "niklashardwig5@gmail.com";
 
-    extraConfig = {
       init.defaultBranch = "main";
       credential.helper = "store";
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
     };
+  };
 
-    delta = {
-      enable = true;
-      options = {
-        line-numbers = true;
-        side-by-side = true;
-        diff-so-fancy = true;
-        navigate = true;
-      };
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      line-numbers = true;
+      side-by-side = true;
+      diff-so-fancy = true;
+      navigate = true;
     };
   };
 
-  # SSH-Agent aktivieren für Git-SSH-Zugriff
+  # SSH-Agent aktivieren für Git- und PI-Zugriff
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
@@ -35,17 +36,27 @@
         forwardX11 = false;
       };
 
+      "pi" = {
+        hostname = "192.168.0.50";
+        user = "lager";
+        identityFile = "~/.ssh/id_ed25519_pi";
+      };
+
       "github.com" = {
-  	identityFile = "~/.ssh/id_rsa";
-  	user = "git";
-  	extraOptions = {
-    	  StrictHostKeyChecking = "no";
+        identityFile = "~/.ssh/id_rsa";
+        user = "git";
+        extraOptions = {
+          StrictHostKeyChecking = "no";
         };
       };
     };
   };
 
-  home.packages = [ pkgs.gh pkgs.openssh ]; # pkgs.git-lfs
+  home.packages = [
+    pkgs.gh
+    pkgs.openssh
+    # pkgs.git-lfs  # optional aktivieren, falls gebraucht
+  ];
 
   programs.zsh.shellAliases = {
     g = "lazygit";

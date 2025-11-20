@@ -12,8 +12,8 @@
     avahi.nssmdns4 = true;  # Helps with mDNS (Bonjour)
     printing.drivers = [ pkgs.hplip ];
     udev.extraRules = ''
-       SUBSYSTEM=="usb", ATTRS{idVendor}=="04b8", ATTRS{idProduct}=="0202", SYMLINK+="epson-tmt88iv", MODE="0666"
-    '';
+       SUBSYSTEM=="usb", ATTR{idVendor}=="04b8", ATTR{idProduct}=="0202", MODE="0666"
+	'';
     gnome = {
       tinysparql.enable = true;
       gnome-keyring.enable = true;

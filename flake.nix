@@ -108,6 +108,11 @@
         modules = [
           ./hosts/laptop
           nvf.nixosModules.default
+	  ({ pkgs, ... }: {
+      	  nixpkgs.config.permittedInsecurePackages = [
+           "gradle-7.6.6"
+          ];
+    	 })
         ];
         specialArgs = {
           host = "laptop";

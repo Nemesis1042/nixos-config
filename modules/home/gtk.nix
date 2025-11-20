@@ -11,7 +11,7 @@ in
     nerd-fonts.hack
     nerd-fonts.symbols-only
     twemoji-color-font
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     fantasque-sans-mono
     #maple-mono
     # monolisa

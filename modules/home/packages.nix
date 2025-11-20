@@ -90,7 +90,11 @@ in
     usbutils
     epson-escpr
     gutenprint
-
+    signal-desktop
+    dotnetCorePackages.sdk_8_0_3xx
+    scenebuilder
+    flutterPackages-source.stable
+    yubioath-flutter
 
 
     # Electron runtime libs
@@ -104,6 +108,7 @@ in
     xorg.libXcomposite
     xorg.libXi
     xorg.libXtst
+    openjdk21
 
     ## CLI 
     cbonsai                           # terminal screensaver
@@ -160,7 +165,7 @@ in
 
 
     #brave
-    whatsapp-for-linux
+    wasistlos
     mysql84
     steam
     nextcloud-client
@@ -184,7 +189,6 @@ in
     localsend
 
     #Kasse
-    openjdk
     openjfx
     gtk3
     glib
