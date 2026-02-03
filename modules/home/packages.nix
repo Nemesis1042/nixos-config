@@ -93,8 +93,8 @@ in
     signal-desktop
     dotnetCorePackages.sdk_8_0_3xx
     scenebuilder
-    flutterPackages-source.stable
-    yubioath-flutter
+    #flutterPackages-source.stable
+    #yubioath-flutter
 
 
     # Electron runtime libs
